@@ -11,6 +11,9 @@ app.use(cors('*'));
 app.use(express.json());
 app.get('/', async (req, res) => {
   const data = await dataMapper.getOne();
+  if (!data) {
+    return (res.status(500).send('error database'));
+  }
   res.status(200).json(
     data,
   );
